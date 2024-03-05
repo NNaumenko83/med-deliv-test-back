@@ -1,11 +1,26 @@
 [
     {
-        "discount": 10
+        "discount": 5
+    },
+    {
+        "discount": 7
+    },
+    {
+        "discount": 9
+    },
+    {
+        "discount": 11
+    },
+    {
+        "discount": 13
+    },
+    {
+        "discount": 15
     },
     {
         "discount": 20
     },
     {
-        "discount": 30
+        "discount": 25
     }
 ]

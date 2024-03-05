@@ -3,6 +3,7 @@ const getShopById = require('./getShopById');
 const getProoductsByShopId = require('./getProoductsByShopId');
 const addOrder = require('./addOrder');
 const getOrders = require('./getOrders');
+const getCoupons = require('./getCoupons');
 
 module.exports = {
     getShops,
@@ -10,4 +11,5 @@ module.exports = {
     getShopById,
     addOrder,
     getOrders,
+    getCoupons,
 };

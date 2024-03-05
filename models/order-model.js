@@ -3,8 +3,7 @@ const { handleMongooseError } = require('../helpers');
 const Joi = require('joi');
 
 const phoneRegExp =
-    /^\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
-
+    /^\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
 const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const orderSchema = new Schema(
@@ -49,15 +48,40 @@ const orderSchema = new Schema(
                     type: Number,
                     required: [true, 'Quantity is required'],
                 },
+                orderPrice: {
+                    type: Number,
+                    required: [true, 'Order price is required'],
+                },
             },
         ],
-
-        price: {
+        coupon: {
+            type: Schema.Types.ObjectId,
+            ref: 'coupons',
+        },
+        total: {
+            type: Number,
+            required: [true, 'Total is required'],
+        },
+        discount: {
+            type: Number,
+            required: [true, 'Total is required'],
+        },
+        totalWidthDiscount: {
             type: Number,
             required: [true, 'Total is required'],
         },
     },
-    { versionKey: false, timestamps: true },
+    {
+        versionKey: false,
+        timestamps: true,
+        id: true,
+        toJSON: {
+            transform(doc, ret) {
+                ret.id = ret._id;
+                delete ret._id;
+            },
+        },
+    },
 );
 
 const addOrderSchema = Joi.object({
@@ -71,10 +95,14 @@ const addOrderSchema = Joi.object({
             Joi.object({
                 product: Joi.string().required(),
                 quantity: Joi.number().integer().min(1).required(),
+                orderPrice: Joi.number().required(),
             }),
         )
         .required(),
-    price: Joi.number().required(),
+    coupon: Joi.string().required(),
+    total: Joi.number().required(),
+    discount: Joi.number().required(),
+    totalWidthDiscount: Joi.number().required(),
 });
 
 orderSchema.post('save', handleMongooseError);

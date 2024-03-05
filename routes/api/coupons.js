@@ -4,6 +4,6 @@ const Router = require('express').Router;
 
 const router = new Router();
 
-router.post('/', getCoupons);
+router.get('/', getCoupons);
 
 module.exports = router;

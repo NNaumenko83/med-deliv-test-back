@@ -1,9 +1,11 @@
-const shopsRoouter = require('./shops');
+const shopsRouter = require('./shops');
 const productsRouter = require('./products');
-const ordersRoouter = require('./orders');
+const ordersRouter = require('./orders');
+const couponsRouter = require('./coupons');
 
 module.exports = function routes(app) {
-    app.use('/api/shops', shopsRoouter);
+    app.use('/api/shops', shopsRouter);
     app.use('/api/products', productsRouter);
-    app.use('/api/orders', ordersRoouter);
+    app.use('/api/orders', ordersRouter);
+    app.use('/api/coupons', couponsRouter);
 };
