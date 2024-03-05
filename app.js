@@ -1,37 +1,31 @@
-const express = require("express");
-const logger = require("morgan");
-const cors = require("cors");
-require("dotenv").config();
-
-const kfcRouter = require("./routes/api/kfc");
-const mcdonaldsRouter = require("./routes/api/mcdonalds");
-const murakamiRouter = require("./routes/api/murakami");
-const ordersRouter = require("./routes/api/orders");
+const express = require('express');
+const logger = require('morgan');
+const cors = require('cors');
+const routes = require('./routes/api');
+require('dotenv').config();
 
 const app = express();
 
-const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/shops/kfc", kfcRouter);
-app.use("/api/shops/mcdonalds", mcdonaldsRouter);
-app.use("/api/shops/murakami", murakamiRouter);
-app.use("/api", ordersRouter);
+routes(app);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+    res.status(404).json({ message: 'Not found' });
 });
 
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Server error" } = err;
-  res.status(status).json({ message });
+    const { status = 500, message = 'Server error' } = err;
+    res.status(status).json({ message });
 });
 
 module.exports = app;
 
 // MongoDB
 // Login: Mykola
-// Password: PqtUu0YpDiqVQY86
+// Password: XHN6XLTOgKVkJ0mx

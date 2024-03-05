@@ -1,10 +1,12 @@
-const express = require("express");
-const ctrl = require("../../controllers/orders");
-const { validateBody } = require("../../middlewares");
-const { addOrderSchema } = require("../../models/orders");
+const { addOrder, getOrders } = require('../../controllers');
+const { validateBody, isValidId } = require('../../middlewares');
+const { addOrderSchema } = require('../../models');
 
-const router = express.Router();
+const Router = require('express').Router;
 
-router.post("/orders", validateBody(addOrderSchema), ctrl.addOrder);
+const router = new Router();
+
+router.post('/', validateBody(addOrderSchema), addOrder);
+router.get('/', getOrders);
 
 module.exports = router;
