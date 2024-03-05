@@ -8,5 +8,6 @@ const router = new Router();
 
 router.post('/', validateBody(addOrderSchema), addOrder);
 router.get('/', getOrders);
+router.get('/:orderId', isValidId('orderId'), getOrders);
 
 module.exports = router;
