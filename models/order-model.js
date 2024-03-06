@@ -2,8 +2,7 @@ const { Schema, model } = require('mongoose');
 const { handleMongooseError } = require('../helpers');
 const Joi = require('joi');
 
-const phoneRegExp =
-    /^\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+const phoneRegExp = /^\d{5,}$/;
 const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const orderSchema = new Schema(
@@ -32,7 +31,7 @@ const orderSchema = new Schema(
 
         shop: {
             type: Schema.Types.ObjectId,
-            ref: 'shops',
+            ref: 'Shop',
             required: [true, 'Shop is required'],
         },
 
