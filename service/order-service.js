@@ -6,10 +6,16 @@ class OrderService {
         return;
     }
     async getOrders(query) {
-        const orders = await Order.find(query).populate({
-            path: 'products.product',
-            model: 'Product',
+        const emailRegex = new RegExp(query.email, 'i');
+        const phoneRegex = new RegExp(query.phone, 'i');
+
+        const orders = await Order.find({
+            $or: [
+                { email: { $regex: emailRegex } },
+                { phone: { $regex: phoneRegex } },
+            ],
         });
+
         return orders;
     }
 }
