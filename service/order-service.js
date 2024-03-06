@@ -14,9 +14,15 @@ class OrderService {
                 { email: { $regex: emailRegex } },
                 { phone: { $regex: phoneRegex } },
             ],
-        });
+        }).populate('products.product');
 
         return orders;
+    }
+
+    async getOrderById(id) {
+        const order = await Order.findById(id);
+
+        return order;
     }
 }
 

@@ -57,6 +57,7 @@ const orderSchema = new Schema(
         coupon: {
             type: Schema.Types.ObjectId,
             ref: 'coupons',
+            default: null,
         },
         total: {
             type: Number,
@@ -66,7 +67,7 @@ const orderSchema = new Schema(
             type: Number,
             required: [true, 'Total is required'],
         },
-        totalWidthDiscount: {
+        totalWithDiscount: {
             type: Number,
             required: [true, 'Total is required'],
         },
@@ -99,10 +100,10 @@ const addOrderSchema = Joi.object({
             }),
         )
         .required(),
-    coupon: Joi.string().required(),
+    coupon: Joi.string().allow(null).optional(),
     total: Joi.number().required(),
     discount: Joi.number().required(),
-    totalWidthDiscount: Joi.number().required(),
+    totalWithDiscount: Joi.number().required(),
 });
 
 orderSchema.post('save', handleMongooseError);

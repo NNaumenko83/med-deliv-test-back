@@ -1,4 +1,4 @@
-const { addOrder, getOrders } = require('../../controllers');
+const { addOrder, getOrders, getOrderById } = require('../../controllers');
 const { validateBody, isValidId } = require('../../middlewares');
 const { addOrderSchema } = require('../../models');
 
@@ -8,6 +8,6 @@ const router = new Router();
 
 router.post('/', validateBody(addOrderSchema), addOrder);
 router.get('/', getOrders);
-router.get('/:orderId', isValidId('orderId'), getOrders);
+router.get('/:orderId', isValidId('orderId'), getOrderById);
 
 module.exports = router;
