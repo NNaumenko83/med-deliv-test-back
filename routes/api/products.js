@@ -10,6 +10,7 @@ const Router = require('express').Router;
 const router = new Router();
 
 router.get('/by-shop/:shopId', getProoductsByShopId);
+
 router.patch(
     '/:productId/favorite',
     isValidId('productId'),
