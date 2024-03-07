@@ -8,6 +8,4 @@ class ProductService {
     }
 }
 
-console.log(new ProductService());
-
 module.exports = new ProductService();

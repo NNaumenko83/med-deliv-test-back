@@ -3,10 +3,9 @@ const { Order } = require('../models');
 class OrderService {
     async addOrder(order) {
         const result = await Order.create(order);
-        return;
+        return result;
     }
     async getOrders(query) {
-        console.log('query:', query);
         const emailRegex = new RegExp(query.email, 'i');
         const phoneRegex = new RegExp(query.phone, 'i');
 
