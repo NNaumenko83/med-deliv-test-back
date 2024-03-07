@@ -1,13 +1,6 @@
 const { Product } = require('../models');
 
 class ProductService {
-    // async getProductsByShopId(shopId) {
-    //     const products = await Product.find({ shopId })
-    //         .sort({ favorite: -1 })
-    //         .exec();
-    //     return products;
-    // }
-
     async getProductsByShopId(shopId, sortBy) {
         console.log('sortBy:', sortBy);
         let sortCriteria = {};
