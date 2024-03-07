@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { handleMongooseError } = require('../helpers');
+const Joi = require('joi');
 
 const SchemaProducts = new Schema(
     {
@@ -24,6 +25,10 @@ const SchemaProducts = new Schema(
             ref: 'shops',
             required: [true, 'Shop is required'],
         },
+        favorite: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         versionKey: false,
@@ -38,8 +43,12 @@ const SchemaProducts = new Schema(
     },
 );
 
+const updateStatusProductSchema = Joi.object({
+    favorite: Joi.boolean().required(),
+});
+
 SchemaProducts.post('save', handleMongooseError);
 
 const Product = model('Product', SchemaProducts);
 
-module.exports = Product;
+module.exports = { Product, updateStatusProductSchema };

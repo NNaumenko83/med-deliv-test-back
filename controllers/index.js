@@ -5,6 +5,7 @@ const addOrder = require('./addOrder');
 const getOrders = require('./getOrders');
 const getOrderById = require('./getOrderById');
 const getCoupons = require('./getCoupons');
+const updateStatusProduct = require('./updateStatusProduct');
 
 module.exports = {
     getShops,
@@ -14,4 +15,5 @@ module.exports = {
     getOrders,
     getCoupons,
     getOrderById,
+    updateStatusProduct,
 };

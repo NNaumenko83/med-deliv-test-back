@@ -6,6 +6,12 @@ class ProductService {
 
         return products;
     }
+    async updateStatusProduct(shopId, data) {
+        const result = await Product.findByIdAndUpdate(shopId, data, {
+            new: true,
+        });
+        return result;
+    }
 }
 
 module.exports = new ProductService();
